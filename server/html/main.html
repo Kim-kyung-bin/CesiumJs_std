@@ -5,36 +5,12 @@
     <title>cesium</title>
 
     <script src="js/Cesium-1.93/Build/Cesium/Cesium.js"></script>
+    <!-- <script src=".js/cmworld/CmWorld.js"></script> -->
+    <script src="js/cesium.js"></script>
     <link href="js/Cesium-1.93/Build/Cesium/Widgets/widgets.css"
       rel="stylesheet" />
   </head>
   <body>
-
     <div id="cesiumContainer"></div>
-
-    <script>
-
-      Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI3ZWZlYWVlYi0zZDQ0LTQ4N2QtOTk4Ni04Y2ZhNzU2MzgzZjYiLCJpZCI6OTIyMTQsImlhdCI6MTY1MTY1MTI4MX0.IB6I9lHC4A4CrtdQNK2gNyFlNvG7AXEkCcT6_TakcrM';
-
-      const viewer = new Cesium.Viewer('cesiumContainer', {
-        terrainProvider: Cesium.createWorldTerrain()
-      });    
-
-      const buildingTileset = viewer.scene.primitives.add(Cesium.createOsmBuildings());   
-
-      viewer.camera.flyTo({
-        // 경도 , 위도 , 높이
-      destination : Cesium.Cartesian3.fromDegrees(126.9779692, 37.566535, 1800),
-      orientation : {
-        heading : Cesium.Math.toRadians(0.0),
-        // 각도?
-        pitch : Cesium.Math.toRadians(-90.0),
-      }
-    });
-
-    
-
-  </script>
-
   </body>
 </html>
