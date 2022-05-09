@@ -12,7 +12,7 @@ window.onload = function(){
       "This browser does not support clampToHeightMostDetailed."
     )
   }
-
+  // 건물 모델링
   const tileset = scene.primitives.add(
     new Cesium.Cesium3DTileset({
       url: Cesium.IonResource.fromAssetId(40866)
