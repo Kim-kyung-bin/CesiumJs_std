@@ -1,7 +1,14 @@
 window.onload = () => {
+
+    //-------------------------------------------------------
+    // init
+    //-------------------------------------------------------   
+    
     // Cesium 지형정보 초기화
     const viewer = new Cesium.Viewer("cesiumContainer", {
         terrainProvider: Cesium.createWorldTerrain(),
+        timeline: false,
+        animation: false,
     });
 
     // view canvas 를 조작하기위한 handler 설정
@@ -22,7 +29,10 @@ window.onload = () => {
         },
     });
 
+    
+    //-------------------------------------------------------
     // Styling functions
+    //-------------------------------------------------------
 
     // 빌딩의 material 값을 체크한 후 값에 따라서 색상 지정
     const colorByMaterial = () => {
@@ -119,7 +129,7 @@ window.onload = () => {
         colorByDistanceToCoordinate(47.62051, -122.34931);
         document.querySelector(".infoPanel").style.visibility = "visible";
         // 좌클릭한 건물의 좌표정보를 가져옴
-        handler.setInputAction( (movement) => {
+        handler.setInputAction((movement) => {
             viewer.selectedEntity = undefined;
             const pickedBuilding = viewer.scene.pick(movement.position);
             if (pickedBuilding) {
@@ -158,6 +168,65 @@ window.onload = () => {
     };
 
     colorByMaterial();
+
+    //-------------------------------------------------------
+    // map pins
+    //-------------------------------------------------------
+
+    const pinBuilder = new Cesium.PinBuilder();
+
+    const bluePin = viewer.entities.add({
+        name: "Blank blue pin",
+        position: Cesium.Cartesian3.fromDegrees(-75.170726, 39.9208667),
+        billboard: {
+            image: pinBuilder.fromColor(Cesium.Color.ROYALBLUE, 48).toDataURL(),
+            verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+        },
+    });
+    const questionPin = viewer.entities.add({
+        name: "Question mark",
+        position: Cesium.Cartesian3.fromDegrees(-75.1698529, 39.9220071),
+        billboard: {
+            image: pinBuilder.fromText("?", Cesium.Color.BLACK, 48).toDataURL(),
+            verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+        },
+    });
+
+    const url = Cesium.buildModuleUrl("Assets/Textures/maki/grocery.png");
+    const groceryPin = Promise.resolve(
+        pinBuilder.fromUrl(url, Cesium.Color.GREEN, 48)
+    ).then( canvas => {
+        return viewer.entities.add({
+            name: "Grocery store",
+            position: Cesium.Cartesian3.fromDegrees(-75.1705217, 39.921786),
+            billboard: {
+                image: canvas.toDataURL(),
+                verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+            },
+        });
+    });
+
+    //Create a red pin representing a hospital from the maki icon set.
+    const hospitalPin = Promise.resolve(
+        pinBuilder.fromMakiIconId("hospital", Cesium.Color.RED, 48)
+    ).then( canvas => {
+        return viewer.entities.add({
+            name: "Hospital",
+            position: Cesium.Cartesian3.fromDegrees(-75.1698606, 39.9211275),
+            billboard: {
+                image: canvas.toDataURL(),
+                verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+            },
+        });
+    });
+
+
+    //Since some of the pins are created asynchronously, wait for them all to load before zooming/
+    Promise.all([bluePin, questionPin, groceryPin, hospitalPin]).then(
+        pins => {
+            viewer.zoomTo(pins);
+        }
+    );
 
 
 }
