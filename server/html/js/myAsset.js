@@ -47,7 +47,7 @@ window.onload = () => {
                 ['${elementId} === 235368665', false],
                 ['${elementId} === 530288180', false],
                 ['${elementId} === 530288179', false],
-                // else
+                // else case
                 [true, true]
             ]
         },
@@ -72,4 +72,5 @@ window.onload = () => {
     document.querySelector('#toggle-building').onclick = function () {
         newBuildingTileset.show = !newBuildingTileset.show;
     };
+
 }
