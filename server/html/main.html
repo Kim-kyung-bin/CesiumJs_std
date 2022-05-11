@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <title>cesium</title>
 
-    <script src="js/Cesium-1.93/Build/Cesium/Cesium.js"></script>
-    
+    <script
+      src="https://cesium.com/downloads/cesiumjs/releases/1.93/Build/Cesium/Cesium.js"></script>
+    <link
+      href="https://cesium.com/downloads/cesiumjs/releases/1.93/Build/Cesium/Widgets/widgets.css"
+      rel="stylesheet">
+
     <!-- 3d model rendering -->
     <!-- <script src="js/cesium.js"></script> -->
 
@@ -13,15 +17,18 @@
     <!-- <script src="js/myAsset.js"></script> -->
 
     <!-- 3d Tile Styling -->
-    <script src="js/featureStyling.js"></script>
+    <!-- <script src="js/featureStyling.js"></script> -->
 
-    <link href="js/Cesium-1.93/Build/Cesium/Widgets/widgets.css"
-      rel="stylesheet" />
+    <!-- draw point -->
+    <script src="js/drawPoint.js"></script>
+
   </head>
   <body>
     <div id="cesiumContainer"></div>
 
-    <div id="toolbar" style="position: absolute; top:10px; left: 10px; z-index: 299;">
+    <!-- 타일 스타일링용 -->
+    <!-- <div id="toolbar" style="position: absolute; top:10px; left: 10px; z-index:
+      299;">
       <select class="cesium-button" id="dropdown">
         <option value="0">Color By Building Material</option>
         <option value="1">Color By Distance To Selected Location</option>
@@ -32,10 +39,13 @@
       <table class="infoPanel">
         <tbody>
           <tr>
-            <td style="color: white;">Click on a building to select as the central location</td>
+            <td style="color: white;">Click on a building to select as the
+              central location</td>
           </tr>
         </tbody>
       </table>
-    </div>
+    </div> -->
+    <!-- /타일 스타일링용 -->
+
   </body>
 </html>
